@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+set number
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -53,9 +54,15 @@ let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'],'javascrip
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'javascript': ['eslint', 'prettier'],}
+let g:prettier#config#semi = 'false'
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#trailing_comma = 'all'
+let g:prettier#exec_cmd_async = 1
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:airline#extensions#ale#enabled = 1
-
+let g:javascript_plugin_flow = 1
 " Prettier
 let g:prettier#config#parser = 'babylon'
