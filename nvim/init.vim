@@ -29,6 +29,7 @@ Plugin 'w0rp/ale'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'prettier/vim-prettier', { 'do': 'npm install' }
+Plugin 'craigemery/vim-autotag'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " :PluginList       - lists configured plugins
