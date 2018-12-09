@@ -43,6 +43,7 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html', 'vue'] }
 Plug 'sheerun/vim-polyglot'
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -72,8 +73,7 @@ endif
 Plug 'honza/vim-snippets'
 
 "" Color
-Plug 'tomasr/molokai'
-
+Plug 'morhetz/gruvbox'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -89,7 +89,7 @@ Plug 'mattn/emmet-vim'
 " javascript
 "" Javascript Bundle
 Plug 'jelera/vim-javascript-syntax'
-
+Plug 'prettier/vim-prettier', {'do': 'npm install'}
 
 "*****************************************************************************
 "*****************************************************************************
@@ -164,9 +164,10 @@ set number relativenumber
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme molokai
+  colorscheme gruvbox
 endif
 
+let g:gruvbox_contrast_light = 'hard'
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
@@ -230,7 +231,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'gruvbox'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -475,7 +476,50 @@ augroup vimrc-javascript
   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
 augroup END
 
+" Prettier
+let g:prettier#exec_cmd_async = 1
+" when running at every change you may want to disable quickfix
+let g:prettier#quickfix_enabled = 0
 
+let g:prettier#autoformat = 0
+" max line length that prettier will wrap on
+" Prettier default: 80
+let g:prettier#config#print_width = 120
+
+" number of spaces per indentation level
+" Prettier default: 2
+let g:prettier#config#tab_width = 2
+
+" use tabs over spaces
+let g:prettier#config#use_tabs = 'false'
+
+" print semicolons
+let g:prettier#config#semi = 'false'
+
+" single quotes over double quotes
+let g:prettier#config#single_quote = 'true'
+
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'true'
+
+" put > on the last line instead of new line
+let g:prettier#config#jsx_bracket_same_line = 'false'
+
+" avoid|always
+let g:prettier#config#arrow_parens = 'always'
+
+" none|es5|all
+let g:prettier#config#trailing_comma = 'all'
+
+" flow|babylon|typescript|css|less|scss|json|graphql|markdown
+let g:prettier#config#parser = 'flow'
+
+" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = 'cli-override'
+
+" always|never|preserve
+let g:prettier#config#prose_wrap = 'preserve'
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 "*****************************************************************************
 "*****************************************************************************
 
