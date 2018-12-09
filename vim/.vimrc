@@ -168,6 +168,7 @@ if !exists('g:not_finish_vimplug')
 endif
 
 let g:gruvbox_contrast_light = 'hard'
+set bg=dark
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
